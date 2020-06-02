@@ -1,18 +1,18 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Icon, Button } from "react-native-elements";
 
-import HomeScreen from "./HomeScreen";
-import DetailsScreen from "./DetailsScreen";
-import ExploreScreen from "./ExploreScreen";
-import ProfileScreen from "./ProfileScreen";
+import HomeScreen from "../screens/HomeScreen";
+import DetailsScreen from "../screens/DetailsScreen";
+import ExploreScreen from "../screens/ExploreScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-const MainTabScreen = () => (
+const MainTabsScreen = () => (
   <Tab.Navigator
     initialRouteName="Profile"
     activeColor="#e91e63"
@@ -22,9 +22,9 @@ const MainTabScreen = () => (
       name="Home"
       component={HomeStackScreen}
       options={{
-        tabBarLabel: "Profile",
+        tabBarLabel: "Home",
         tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="home" color={color} size={26} />
+          <Icon name="home" type="material-community" color={color} size={26} />
         ),
       }}
     />
@@ -34,7 +34,7 @@ const MainTabScreen = () => (
       options={{
         tabBarLabel: "Explore",
         tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="bell" color={color} size={26} />
+          <Icon name="bell" type="material-community" color={color} size={26} />
         ),
       }}
     />
@@ -44,7 +44,12 @@ const MainTabScreen = () => (
       options={{
         tabBarLabel: "Profile",
         tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="account" color={color} size={26} />
+          <Icon
+            name="account"
+            type="material-community"
+            color={color}
+            size={26}
+          />
         ),
       }}
     />
@@ -54,13 +59,18 @@ const MainTabScreen = () => (
       options={{
         tabBarLabel: "Profile",
         tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="magnify" color={color} size={26} />
+          <Icon
+            name="magnify"
+            type="material-community"
+            color={color}
+            size={26}
+          />
         ),
       }}
     />
   </Tab.Navigator>
 );
-export default MainTabScreen;
+export default MainTabsScreen;
 const HomeStackScreen = ({ navigation }) => (
   <HomeStack.Navigator
     screenOptions={{
@@ -79,9 +89,13 @@ const HomeStackScreen = ({ navigation }) => (
       options={{
         title: "Overview",
         headerLeft: () => (
-          <Ionicons.Button
-            name="ios-menu"
-            backgroundColor="orange"
+          <Button
+            buttonStyle={{ backgroundColor: "orange" }}
+            icon={{
+              name: "blur",
+              type: "material-community",
+              backgroundColor: "orange",
+            }}
             size={35}
             onPress={() => {
               navigation.openDrawer();
@@ -110,9 +124,13 @@ const DetailsStackScreen = ({ navigation }) => (
       component={DetailsScreen}
       options={{
         headerLeft: () => (
-          <Ionicons.Button
-            name="ios-menu"
-            backgroundColor="orange"
+          <Button
+            buttonStyle={{ backgroundColor: "orange" }}
+            icon={{
+              name: "blur",
+              type: "material-community",
+              backgroundColor: "orange",
+            }}
             size={35}
             onPress={() => {
               navigation.openDrawer();

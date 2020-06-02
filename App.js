@@ -2,16 +2,23 @@ import "react-native-gesture-handler";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import MainTabsScreen from "./app/screens/MainTabsScreen";
+import MainTabsScreen from "./app/navigations/MainTabsScreen";
+import { DrawerContent } from "./app/navigations/DrawerContent";
+
+import BookmarkScreen from "./app/screens/BookmarkScreen";
+import SettingScreen from "./app/screens/SettingScreen";
+import SupportScreen from "./app/screens/SupportScreen";
 
 const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen name="Home" component={MainTabsScreen} />
-        {/*<Drawer.Screen name="Details" component={DetailsStackScreen} />*/}
+        <Drawer.Screen name="Bookmark" component={BookmarkScreen} />
+        <Drawer.Screen name="Setting" component={SettingScreen} />
+        <Drawer.Screen name="Support" component={SupportScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
