@@ -1,10 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, StatusBar } from "react-native";
+import { useTheme } from "@react-navigation/native";
 export default function HomeScreen({ navigation }) {
-  console.log(navigation);
+  const { colors } = useTheme();
+  const theme = useTheme();
+  //console.log(navigation);
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <StatusBar barStyle={theme.dark ? "light-content" : "dark-content"} />
+      <Text style={{ color: colors.text }}>Home Screen</Text>
       <Button
         title="Go.. details"
         onPress={() => navigation.navigate("Details")}
@@ -16,7 +20,6 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },

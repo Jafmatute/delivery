@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTheme } from "react-native-paper";
 import {
   View,
   Text,
@@ -15,6 +16,7 @@ import * as Animatable from "react-native-animatable";
 
 const SignUpScreen = ({ navigation }) => {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
+  const { colors } = useTheme();
   const [isVisiblePasswordConfirm, setIsVisiblePasswordConfirm] = useState(
     false
   );
@@ -66,11 +68,14 @@ const SignUpScreen = ({ navigation }) => {
       <View style={styles.header}>
         <Text style={styles.text_header}>Register Now</Text>
       </View>
-      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <Text style={styles.tex_footer}>Email</Text>
+      <Animatable.View
+        animation="fadeInUpBig"
+        style={[styles.footer, { backgroundColor: colors.background }]}
+      >
+        <Text style={[styles.tex_footer, { color: colors.text }]}>Email</Text>
         <View style={styles.action}>
           <Input
-            placeholder="Ingrese su email"
+            //placeholder="Ingrese su email"
             style={styles.textInput}
             autoCapitalize="none"
             onChangeText={(e) => inputChangeEmail(e)}
@@ -78,6 +83,7 @@ const SignUpScreen = ({ navigation }) => {
               type: "material-community",
               name: "account-check-outline",
               size: 20,
+              color: colors.text,
             }}
             rightIcon={
               data.checkInput ? (
@@ -93,10 +99,12 @@ const SignUpScreen = ({ navigation }) => {
             }
           />
         </View>
-        <Text style={styles.tex_footer}>Password</Text>
+        <Text style={[styles.tex_footer, { color: colors.text }]}>
+          Password
+        </Text>
         <View style={styles.action}>
           <Input
-            placeholder="Ingrese su password"
+            //placeholder="Ingrese su password"
             secureTextEntry={isVisiblePassword ? false : true}
             onChangeText={(e) => handlePassword(e)}
             style={styles.textInput}
@@ -105,6 +113,7 @@ const SignUpScreen = ({ navigation }) => {
               type: "material-community",
               name: "lock-question",
               size: 20,
+              color: colors.text,
             }}
             rightIcon={
               <Icon
@@ -112,15 +121,18 @@ const SignUpScreen = ({ navigation }) => {
                 name={isVisiblePassword ? "eye-off-outline" : "eye-outline"}
                 size={20}
                 onPress={() => setIsVisiblePassword(!isVisiblePassword)}
+                color={colors.text}
               />
             }
           />
         </View>
 
-        <Text style={styles.tex_footer}>Confirm Password</Text>
+        <Text style={[styles.tex_footer, { color: colors.text }]}>
+          Confirm Password
+        </Text>
         <View style={styles.action}>
           <Input
-            placeholder="Ingrese su password"
+            //placeholder="Ingrese su password"
             secureTextEntry={isVisiblePasswordConfirm ? false : true}
             onChangeText={(e) => handlePasswordConfirm(e)}
             style={styles.textInput}
@@ -129,6 +141,7 @@ const SignUpScreen = ({ navigation }) => {
               type: "material-community",
               name: "lock-question",
               size: 20,
+              color: colors.text,
             }}
             rightIcon={
               <Icon
@@ -137,6 +150,7 @@ const SignUpScreen = ({ navigation }) => {
                   isVisiblePasswordConfirm ? "eye-off-outline" : "eye-outline"
                 }
                 size={20}
+                color={colors.text}
                 onPress={() =>
                   setIsVisiblePasswordConfirm(!isVisiblePasswordConfirm)
                 }
@@ -197,8 +211,8 @@ const styles = StyleSheet.create({
   action: {
     flexDirection: "row",
     marginTop: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f2f2f2",
+    //borderBottomWidth: 1,
+    //borderBottomColor: "#f2f2f2",
     paddingBottom: 5,
   },
   textInput: {

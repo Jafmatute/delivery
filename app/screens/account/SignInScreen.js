@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useTheme } from "@react-navigation/native";
 import {
   View,
   Text,
@@ -17,6 +18,7 @@ import { AuthContext } from "../../components/Context";
 import Users from "../../model/users";
 const SignInScreen = ({ navigation }) => {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
+  const { colors } = useTheme();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -100,10 +102,13 @@ const SignInScreen = ({ navigation }) => {
     <View style={styles.container}>
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
       <View style={styles.header}>
-        <Text style={styles.text_header}>Iniciar Sesión</Text>
+        <Text style={[styles.text_header]}>Iniciar Sesión</Text>
       </View>
-      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <Text style={styles.tex_footer}>Email</Text>
+      <Animatable.View
+        animation="fadeInUpBig"
+        style={[styles.footer, { backgroundColor: colors.background }]}
+      >
+        <Text style={[styles.tex_footer, { color: colors.text }]}>Email</Text>
         <View style={styles.action}>
           <Input
             placeholder="Ingrese su email"
@@ -115,6 +120,7 @@ const SignInScreen = ({ navigation }) => {
               type: "material-community",
               name: "account-check-outline",
               size: 20,
+              color: colors.text,
             }}
             rightIcon={
               data.checkInput ? (
@@ -132,14 +138,13 @@ const SignInScreen = ({ navigation }) => {
         </View>
         {data.isValidEmail ? null : (
           <Animatable.View animatable="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>
-              {" "}
-              Email must be 4 characters log{" "}
-            </Text>
+            <Text style={styles.errorMsg}>Email must be 4 characters log</Text>
           </Animatable.View>
         )}
 
-        <Text style={styles.tex_footer}>Password</Text>
+        <Text style={[styles.tex_footer, { color: colors.text }]}>
+          Password
+        </Text>
         <View style={styles.action}>
           <Input
             placeholder="Ingrese su password"
@@ -151,6 +156,7 @@ const SignInScreen = ({ navigation }) => {
               type: "material-community",
               name: "lock-question",
               size: 20,
+              color: colors.text,
             }}
             rightIcon={
               <Icon
@@ -158,22 +164,20 @@ const SignInScreen = ({ navigation }) => {
                 name={isVisiblePassword ? "eye-off-outline" : "eye-outline"}
                 size={20}
                 onPress={() => setIsVisiblePassword(!isVisiblePassword)}
+                color={colors.text}
               />
             }
           />
         </View>
         {data.isValidPassword ? null : (
           <Animatable.View animatable="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>
-              {" "}
-              Email must be 8 characters log{" "}
-            </Text>
+            <Text style={styles.errorMsg}>Email must be 8 characters log</Text>
           </Animatable.View>
         )}
 
         <TouchableOpacity>
           <Text style={{ color: "#009387", marginTop: 15 }}>
-            Forgot password
+            Forgot password ?
           </Text>
         </TouchableOpacity>
         <View style={styles.button}>
@@ -239,8 +243,8 @@ const styles = StyleSheet.create({
   action: {
     flexDirection: "row",
     marginTop: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f2f2f2",
+    //borderBottomWidth: 1,
+    //borderBottomColor: "#f2f2f2",
     paddingBottom: 5,
   },
   textInput: {

@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Icon } from "react-native-elements";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import {
+  useTheme,
   Avatar,
   Title,
   Caption,
@@ -13,16 +14,19 @@ import {
   Switch,
 } from "react-native-paper";
 
-import { AuthContext  } from "../components/Context";
+import { AuthContext } from "../components/Context";
 
 export function DrawerContent(props) {
   //console.log("drawer conten", props);
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
-  const { signOut } = useContext(AuthContext);
-  const toggleTheme = () => {
-    setDarkTheme(!darkTheme);
-  };
+  const paperTheme = useTheme();
+
+  const { signOut, toggleTheme } = useContext(AuthContext);
+
+  /*const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };*/
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -131,7 +135,7 @@ export function DrawerContent(props) {
               <View style={styles.preference}>
                 <Text>Dark Theme</Text>
                 <View pointerEvents="none">
-                  <Switch value={darkTheme} />
+                  <Switch value={paperTheme.dark} />
                 </View>
               </View>
             </TouchableRipple>
@@ -142,7 +146,7 @@ export function DrawerContent(props) {
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
           label="Sing Up"
-          onPress={()=> signOut()}
+          onPress={() => signOut()}
           icon={({ color, size }) => (
             <Icon
               type="material-community"

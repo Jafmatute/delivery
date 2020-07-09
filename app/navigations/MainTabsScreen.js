@@ -16,13 +16,14 @@ const MainTabsScreen = () => (
   <Tab.Navigator
     initialRouteName="Profile"
     activeColor="#e91e63"
-    style={{ backgroundColor: "tomato", color: "#08d4c4" }}
+    //style={{ backgroundColor: "white", color: "#fff" }}
   >
     <Tab.Screen
       name="Home"
       component={HomeStackScreen}
       options={{
         tabBarLabel: "Home",
+        tabBarColor: "#08d4c4",
         tabBarIcon: ({ color }) => (
           <Icon name="home" type="material-community" color={color} size={26} />
         ),
@@ -32,7 +33,8 @@ const MainTabsScreen = () => (
       name="Details"
       component={DetailsStackScreen}
       options={{
-        tabBarLabel: "Explore",
+        tabBarLabel: "Notifications",
+        tabBarColor: "#08d4c4",
         tabBarIcon: ({ color }) => (
           <Icon name="bell" type="material-community" color={color} size={26} />
         ),
@@ -43,6 +45,7 @@ const MainTabsScreen = () => (
       component={ProfileScreen}
       options={{
         tabBarLabel: "Profile",
+        tabBarColor: "#08d4c4",
         tabBarIcon: ({ color }) => (
           <Icon
             name="account"
@@ -57,7 +60,8 @@ const MainTabsScreen = () => (
       name="Explore"
       component={ExploreScreen}
       options={{
-        tabBarLabel: "Profile",
+        tabBarLabel: "Search",
+        tabBarColor: "#08d4c4",
         tabBarIcon: ({ color }) => (
           <Icon
             name="magnify"
@@ -92,7 +96,7 @@ const HomeStackScreen = ({ navigation }) => (
           <Button
             buttonStyle={{ backgroundColor: "#08d4c4" }}
             icon={{
-              name: "blur",
+              name: "menu",
               type: "material-community",
               backgroundColor: "#08d4c4",
             }}
@@ -127,7 +131,7 @@ const DetailsStackScreen = ({ navigation }) => (
           <Button
             buttonStyle={{ backgroundColor: "#08d4c4" }}
             icon={{
-              name: "blur",
+              name: "menu",
               type: "material-community",
               backgroundColor: "#08d4c4",
             }}
