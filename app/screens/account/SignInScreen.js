@@ -8,11 +8,13 @@ import {
   Dimensions,
   TouchableOpacity,
   StatusBar,
+  Alert,
 } from "react-native";
 import { Image, Icon, Input } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { AuthContext } from "../../components/Context";
+import Users from "../../model/users";
 const SignInScreen = ({ navigation }) => {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const [data, setData] = useState({
@@ -20,39 +22,80 @@ const SignInScreen = ({ navigation }) => {
     password: "",
     checkInput: false,
     securityPassword: true,
+    isValidEmail: true,
+    isValidPassword: true,
   });
 
   const { signIn } = useContext(AuthContext);
 
   const inputChangeEmail = (e) => {
     //console.log(e);
-    if (e.length > 0) {
+    if (e.trim().length >= 4) {
       setData({
         ...data,
         email: e,
         checkInput: true,
+        isValidEmail: true,
       });
     } else {
       setData({
         ...data,
         email: e,
         checkInput: false,
+        isValidEmail: false,
       });
     }
   };
   const handlePassword = (e) => {
-    console.log(e);
-    if (e.length > 0) {
+    // console.log(e);
+    if (e.trim().length >= 8) {
       setData({
         ...data,
         password: e,
+        isValidPassword: true,
+      });
+    } else {
+      setData({
+        ...data,
+        password: e,
+        isValidPassword: false,
       });
     }
   };
-  const loginHandle = (email,password) =>{
-    signIn(email,password);
 
-  }
+  const handleValidUser = (val) => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        isValidEmail: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidEmail: false,
+      });
+    }
+  };
+  const loginHandle = (email, password) => {
+    const foundUser = Users.filter((item) => {
+      return email === item.email && password === item.password;
+    });
+
+    if (data.email.length === 0 || data.password.length === 0) {
+      Alert.alert("Wrong Input", "email or password field cannot be empty", [
+        { text: "Ok" },
+      ]);
+      return;
+    }
+
+    if (foundUser.length === 0) {
+      Alert.alert("Invalid user", "email or password is incorrect", [
+        { text: "Ok" },
+      ]);
+      return;
+    }
+    signIn(foundUser);
+  };
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
@@ -67,6 +110,7 @@ const SignInScreen = ({ navigation }) => {
             style={styles.textInput}
             autoCapitalize="none"
             onChangeText={(e) => inputChangeEmail(e)}
+            onEndEditing={(x) => handleValidUser(x.nativeEvent.text)}
             leftIcon={{
               type: "material-community",
               name: "account-check-outline",
@@ -86,6 +130,15 @@ const SignInScreen = ({ navigation }) => {
             }
           />
         </View>
+        {data.isValidEmail ? null : (
+          <Animatable.View animatable="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>
+              {" "}
+              Email must be 4 characters log{" "}
+            </Text>
+          </Animatable.View>
+        )}
+
         <Text style={styles.tex_footer}>Password</Text>
         <View style={styles.action}>
           <Input
@@ -109,13 +162,27 @@ const SignInScreen = ({ navigation }) => {
             }
           />
         </View>
+        {data.isValidPassword ? null : (
+          <Animatable.View animatable="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>
+              {" "}
+              Email must be 8 characters log{" "}
+            </Text>
+          </Animatable.View>
+        )}
+
         <TouchableOpacity>
           <Text style={{ color: "#009387", marginTop: 15 }}>
             Forgot password
           </Text>
         </TouchableOpacity>
         <View style={styles.button}>
-          <TouchableOpacity style={styles.signIn} onPress={()=> {loginHandle(data.email,data.password) }}>
+          <TouchableOpacity
+            style={styles.signIn}
+            onPress={() => {
+              loginHandle(data.email, data.password);
+            }}
+          >
             <LinearGradient
               colors={["#08d4c4", "#01ab9d"]}
               style={styles.signIn}
@@ -197,5 +264,11 @@ const styles = StyleSheet.create({
   textSign: {
     fontSize: 18,
     fontWeight: "bold",
+  },
+  errorMsg: {
+    color: "red",
+    marginBottom: 30,
+    marginTop: -25,
+    justifyContent: "center",
   },
 });
