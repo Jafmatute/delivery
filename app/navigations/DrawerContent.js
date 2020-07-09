@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import { Icon } from "react-native-elements";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
@@ -13,9 +13,13 @@ import {
   Switch,
 } from "react-native-paper";
 
+import { AuthContext  } from "../components/Context";
+
 export function DrawerContent(props) {
   //console.log("drawer conten", props);
   const [darkTheme, setDarkTheme] = useState(false);
+
+  const { signOut } = useContext(AuthContext);
   const toggleTheme = () => {
     setDarkTheme(!darkTheme);
   };
@@ -138,6 +142,7 @@ export function DrawerContent(props) {
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
           label="Sing Up"
+          onPress={()=> signOut()}
           icon={({ color, size }) => (
             <Icon
               type="material-community"

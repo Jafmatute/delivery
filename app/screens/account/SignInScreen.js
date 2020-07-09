@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
 import { Image, Icon, Input } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
-
+import { AuthContext } from "../../components/Context";
 const SignInScreen = ({ navigation }) => {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const [data, setData] = useState({
@@ -21,6 +21,9 @@ const SignInScreen = ({ navigation }) => {
     checkInput: false,
     securityPassword: true,
   });
+
+  const { signIn } = useContext(AuthContext);
+
   const inputChangeEmail = (e) => {
     //console.log(e);
     if (e.length > 0) {
@@ -46,6 +49,10 @@ const SignInScreen = ({ navigation }) => {
       });
     }
   };
+  const loginHandle = (email,password) =>{
+    signIn(email,password);
+
+  }
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
@@ -102,10 +109,20 @@ const SignInScreen = ({ navigation }) => {
             }
           />
         </View>
+        <TouchableOpacity>
+          <Text style={{ color: "#009387", marginTop: 15 }}>
+            Forgot password
+          </Text>
+        </TouchableOpacity>
         <View style={styles.button}>
-          <LinearGradient colors={["#08d4c4", "#01ab9d"]} style={styles.signIn}>
-            <Text style={[styles.textSign, { color: "#fff" }]}>Sign In </Text>
-          </LinearGradient>
+          <TouchableOpacity style={styles.signIn} onPress={()=> {loginHandle(data.email,data.password) }}>
+            <LinearGradient
+              colors={["#08d4c4", "#01ab9d"]}
+              style={styles.signIn}
+            >
+              <Text style={[styles.textSign, { color: "#fff" }]}>Sign In </Text>
+            </LinearGradient>
+          </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => navigation.navigate("SignUp")}

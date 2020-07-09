@@ -16,7 +16,7 @@ const MainTabsScreen = () => (
   <Tab.Navigator
     initialRouteName="Profile"
     activeColor="#e91e63"
-    style={{ backgroundColor: "tomato" }}
+    style={{ backgroundColor: "tomato", color: "#08d4c4" }}
   >
     <Tab.Screen
       name="Home"
@@ -75,7 +75,7 @@ const HomeStackScreen = ({ navigation }) => (
   <HomeStack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: "orange",
+        backgroundColor: "#08d4c4",
       },
       headerTintColor: "#ffff",
       headerTitleStyle: {
@@ -90,11 +90,11 @@ const HomeStackScreen = ({ navigation }) => (
         title: "Overview",
         headerLeft: () => (
           <Button
-            buttonStyle={{ backgroundColor: "orange" }}
+            buttonStyle={{ backgroundColor: "#08d4c4" }}
             icon={{
               name: "blur",
               type: "material-community",
-              backgroundColor: "orange",
+              backgroundColor: "#08d4c4",
             }}
             size={35}
             onPress={() => {
@@ -111,7 +111,7 @@ const DetailsStackScreen = ({ navigation }) => (
   <DetailsStack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: "orange",
+        backgroundColor: "#08d4c4",
       },
       headerTintColor: "#ffff",
       headerTitleStyle: {
@@ -125,11 +125,11 @@ const DetailsStackScreen = ({ navigation }) => (
       options={{
         headerLeft: () => (
           <Button
-            buttonStyle={{ backgroundColor: "orange" }}
+            buttonStyle={{ backgroundColor: "#08d4c4" }}
             icon={{
               name: "blur",
               type: "material-community",
-              backgroundColor: "orange",
+              backgroundColor: "#08d4c4",
             }}
             size={35}
             onPress={() => {
