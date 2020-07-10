@@ -2,14 +2,18 @@ import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Icon, Button } from "react-native-elements";
+import { useTheme } from "react-native-paper";
 
 import HomeScreen from "../screens/HomeScreen";
 import DetailsScreen from "../screens/DetailsScreen";
 import ExploreScreen from "../screens/ExploreScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import ProfileScreen from "../screens/profile/ProfileScreen";
+import EditProfileScreen from "../screens/profile/EditProfileScreen";
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
+
 const Tab = createMaterialBottomTabNavigator();
 
 const MainTabsScreen = () => (
@@ -42,7 +46,7 @@ const MainTabsScreen = () => (
     />
     <Tab.Screen
       name="Profile"
-      component={ProfileScreen}
+      component={ProfileStackScreen}
       options={{
         tabBarLabel: "Profile",
         tabBarColor: "#08d4c4",
@@ -145,3 +149,66 @@ const DetailsStackScreen = ({ navigation }) => (
     />
   </DetailsStack.Navigator>
 );
+
+const ProfileStackScreen = ({ navigation }) => {
+  const { colors } = useTheme();
+
+  return (
+    <ProfileStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: colors.background,
+          shadowColor: colors.background, //IOS
+          elevation: 0, //Android
+        },
+        headerTintColor: colors.text,
+        /*headerTitleStyle: {
+        fontWeight: "bold",
+      },*/
+      }}
+    >
+      <ProfileStack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          //title: "",
+          headerLeft: () => (
+            <Button
+              buttonStyle={{ backgroundColor: colors.background }}
+              icon={{
+                name: "menu",
+                type: "material-community",
+                //backgroundColor: "#08d4c4",
+                color: colors.text,
+              }}
+              size={35}
+              onPress={() => {
+                navigation.openDrawer();
+              }}
+            />
+          ),
+          headerRight: () => (
+            <Button
+              buttonStyle={{ backgroundColor: colors.background }}
+              icon={{
+                name: "account-edit",
+                type: "material-community",
+                //backgroundColor: "#08d4c4",
+                color: colors.text,
+              }}
+              size={25}
+              onPress={() => navigation.navigate("EditProfile")}
+            />
+          ),
+        }}
+      />
+      <ProfileStack.Screen
+        name="EditProfile"
+        options={{
+          title: "Edit Profile",
+        }}
+        component={EditProfileScreen}
+      />
+    </ProfileStack.Navigator>
+  );
+};
