@@ -37,6 +37,11 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Delivery app requires photo library access</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Delivery app requires camera access to take photo</string>
+
 	<key>NSCalendarsUsageDescription</key>
 	<string>Allow delivery to access your calendar</string>
 	<key>NSCameraUsageDescription</key>
