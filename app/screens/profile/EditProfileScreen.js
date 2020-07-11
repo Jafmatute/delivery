@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -12,8 +12,49 @@ import { Input, Icon } from "react-native-elements";
 import { useTheme } from "react-native-paper";
 import BottomSheet from "reanimated-bottom-sheet";
 import Animated from "react-native-reanimated";
+import ImagePicker from "react-native-image-crop-picker";
 export default function EditProfileScreen() {
   const { colors } = useTheme();
+  const [image, setImage] = useState(
+    "https://api.adorable.io/avatars/263/abott@adorable.pngCopy to Clipb"
+  );
+
+  const takePhotoFromCamera = () => {
+    //console.warn("Take foto");
+    ImagePicker.openCamera({
+      //width: 300,
+      compressImageMaxHeight: 300,
+      compressImageMaxWidth: 300,
+      //height: 300,
+      cropping: true,
+      compressImageQuality: 0.7,
+    }).then((image) => {
+      //console.log(image);
+      setImage(image.path);
+      bs.current.snapTo(1);
+      console.log("state image", image);
+    });
+  };
+
+  const choosePhotoFromLibrery = () => {
+    //console.warn("Library foto");
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+      compressImageQuality: 0.7,
+    }).then((image) => {
+      //console.log("respuesta de la imagen", image);
+      setImage(image.path);
+      bs.current.snapTo(1);
+      console.log("state image", image);
+    });
+    /*ImagePicker.openPicker({
+      multiple: true,
+    }).then((images) => {
+      console.log(images);
+    });*/
+  };
 
   const renderInner = () => (
     <View style={styles.panel}>
@@ -23,10 +64,16 @@ export default function EditProfileScreen() {
         <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
       </View>
       {/**subida de fotos */}
-      <TouchableOpacity style={styles.panelButton}>
+      <TouchableOpacity
+        style={styles.panelButton}
+        onPress={takePhotoFromCamera}
+      >
         <Text style={styles.panelButtonTitle}>Take Photo</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.panelButton}>
+      <TouchableOpacity
+        style={styles.panelButton}
+        onPress={choosePhotoFromLibrery}
+      >
         <Text style={styles.panelButtonTitle}>Choose from library</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -83,8 +130,7 @@ export default function EditProfileScreen() {
             >
               <ImageBackground
                 source={{
-                  uri:
-                    "https://api.adorable.io/avatars/263/abott@adorable.pngCopy to Clipb",
+                  uri: image,
                 }}
                 style={{ height: 100, width: 100 }}
                 imageStyle={{ borderRadius: 15 }}
