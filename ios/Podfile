@@ -43,6 +43,5 @@ target 'delivery' do
 
   # react-native-cli autolinking
   use_native_modules!
-  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
 end
