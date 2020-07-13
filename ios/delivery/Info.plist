@@ -53,7 +53,7 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Allow delivery to use your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow delivery to use your location</string>
+	<string>Allow delivery to use your location en la APP</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow delivery to access your microphone</string>
 	<key>NSMotionUsageDescription</key>
