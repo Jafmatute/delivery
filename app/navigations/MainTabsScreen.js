@@ -7,6 +7,7 @@ import { useTheme } from "react-native-paper";
 import HomeScreen from "../screens/HomeScreen";
 import DetailsScreen from "../screens/DetailsScreen";
 import ExploreScreen from "../screens/ExploreScreen";
+import MapTestScreen from "../screens/MapTestScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import EditProfileScreen from "../screens/profile/EditProfileScreen";
 
