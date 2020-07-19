@@ -5,14 +5,13 @@ import { Icon, Button } from "react-native-elements";
 import { useTheme } from "react-native-paper";
 
 import HomeScreen from "../screens/HomeScreen";
-import DetailsScreen from "../screens/DetailsScreen";
+import NotificationsScreen from "../screens/NotificationsScreen";
 import ExploreScreen from "../screens/ExploreScreen";
-import MapTestScreen from "../screens/MapTestScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import EditProfileScreen from "../screens/profile/EditProfileScreen";
 
 const HomeStack = createStackNavigator();
-const DetailsStack = createStackNavigator();
+const NotificationsStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
@@ -35,8 +34,8 @@ const MainTabsScreen = () => (
       }}
     />
     <Tab.Screen
-      name="Details"
-      component={DetailsStackScreen}
+      name="Notifications"
+      component={NotificationsStackScreen}
       options={{
         tabBarLabel: "Notifications",
         tabBarColor: "#08d4c4",
@@ -116,8 +115,8 @@ const HomeStackScreen = ({ navigation }) => (
   </HomeStack.Navigator>
 );
 
-const DetailsStackScreen = ({ navigation }) => (
-  <DetailsStack.Navigator
+const NotificationsStackScreen = ({ navigation }) => (
+  <NotificationsStack.Navigator
     screenOptions={{
       headerStyle: {
         backgroundColor: "#08d4c4",
@@ -128,9 +127,9 @@ const DetailsStackScreen = ({ navigation }) => (
       },
     }}
   >
-    <DetailsStack.Screen
-      name="Details"
-      component={DetailsScreen}
+    <NotificationsStack.Screen
+      name="Notifications"
+      component={NotificationsScreen}
       options={{
         headerLeft: () => (
           <Button
@@ -148,7 +147,7 @@ const DetailsStackScreen = ({ navigation }) => (
         ),
       }}
     />
-  </DetailsStack.Navigator>
+  </NotificationsStack.Navigator>
 );
 
 const ProfileStackScreen = ({ navigation }) => {
