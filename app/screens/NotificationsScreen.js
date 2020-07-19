@@ -129,58 +129,62 @@ export default function DetailsScreen({ navigation }) {
         style={[styles.rowBack, { height: rowHeightAnimatedValue }]}
       >
         <Text>Info</Text>
-        <TouchableOpacity
-          onPress={onClose}
-          style={[styles.backRightBtn, styles.backRightBtnLeft]}
-        >
-          <Icon
-            type="material-community"
-            name="close-circle-outline"
-            size={30}
-            color="#fff"
-            iconStyle={styles.trash}
-          />
-        </TouchableOpacity>
-        <Animated.View
-          style={[
-            styles.backRightBtn,
-            styles.backRightBtnRight,
-            {
-              flex: 1,
-              width: rowActionAnimatedValue,
-            },
-          ]}
-        >
+        {!leftActionActivated && (
           <TouchableOpacity
-            onPress={onDelete}
-            style={[styles.backRightBtn, styles.backRightBtnRight]}
+            onPress={onClose}
+            style={[styles.backRightBtn, styles.backRightBtnLeft]}
           >
-            <Animated.View
-              style={[
-                styles.trash,
-                {
-                  transform: [
-                    {
-                      scale: swipeAnimatedValue.interpolate({
-                        inputRange: [-90, -45],
-                        outputRange: [1, 0],
-                        extrapolate: "clamp",
-                      }),
-                    },
-                  ],
-                },
-              ]}
-            >
-              <Icon
-                type="material-community"
-                name="trash-can-outline"
-                size={30}
-                color="#fff"
-                //iconStyle={styles.trash}
-              />
-            </Animated.View>
+            <Icon
+              type="material-community"
+              name="close-circle-outline"
+              size={30}
+              color="#fff"
+              iconStyle={styles.trash}
+            />
           </TouchableOpacity>
-        </Animated.View>
+        )}
+        {!leftActionActivated && (
+          <Animated.View
+            style={[
+              styles.backRightBtn,
+              styles.backRightBtnRight,
+              {
+                flex: 1,
+                width: rowActionAnimatedValue,
+              },
+            ]}
+          >
+            <TouchableOpacity
+              onPress={onDelete}
+              style={[styles.backRightBtn, styles.backRightBtnRight]}
+            >
+              <Animated.View
+                style={[
+                  styles.trash,
+                  {
+                    transform: [
+                      {
+                        scale: swipeAnimatedValue.interpolate({
+                          inputRange: [-90, -45],
+                          outputRange: [1, 0],
+                          extrapolate: "clamp",
+                        }),
+                      },
+                    ],
+                  },
+                ]}
+              >
+                <Icon
+                  type="material-community"
+                  name="trash-can-outline"
+                  size={30}
+                  color="#fff"
+                  //iconStyle={styles.trash}
+                />
+              </Animated.View>
+            </TouchableOpacity>
+          </Animated.View>
+        )}
       </Animated.View>
     );
   };
