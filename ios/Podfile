@@ -50,4 +50,6 @@ target 'delivery' do
     pod 'Google-Maps-iOS-Utils'
   use_native_modules!
 
+  pod 'RNShare', :path => '../node_modules/react-native-share'
+
 end

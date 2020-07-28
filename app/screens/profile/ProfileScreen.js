@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Safaç, View, Button, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Safaç,
+  View,
+  Button,
+  SafeAreaView,
+  Platform,
+} from "react-native";
 import {
   Avatar,
   Title,
@@ -9,8 +16,28 @@ import {
 } from "react-native-paper";
 import { Icon } from "react-native-elements";
 import { useTheme } from "react-native-paper";
+import Share from "react-native-share";
+
+import files from "../../../assets/filesBase64";
 const ProfileScreen = () => {
   const { colors } = useTheme();
+
+  const myCustomShare = async () => {
+    const shareOptions = {
+      message: "Order your next meal from Findit App.  ",
+      //url:files.image2
+      //url:files.samplePdf
+      //urls: [files.image1,files.image2]
+      url: files.appLogo,
+    };
+
+    try {
+      const shareResponse = await Share.open(shareOptions);
+      console.log("RESPONSE SHARE", JSON.stringify(shareResponse));
+    } catch (error) {
+      console.log("Error =>>", error);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       {/*Informaciòn de inicio de sesiòn*/}
@@ -110,7 +137,7 @@ const ProfileScreen = () => {
             <Text style={styles.menuItemText}>Payment</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
+        <TouchableRipple onPress={myCustomShare}>
           <View style={styles.menuItem}>
             <Icon
               type="material-community"
